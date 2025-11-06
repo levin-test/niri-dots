@@ -1,0 +1,7 @@
+configuration {
+    show-icons: true;
+    terminal: "kitty";
+    font: "JetBrainsMono Nerd Font Mono 12";
+}
+
+@theme "Arc-Dark.rasi"

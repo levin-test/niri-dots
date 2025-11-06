@@ -1,0 +1,12 @@
+{
+  "modules-center": ["clock"],
+  "modules-right": ["custom/wlogout"],
+  "clock": {
+    "format": "{:%A, %d.%m.%Y   %H:%M}"
+  },
+  "custom/wlogout": {
+    "format": "⏻",
+    "tooltip": "Logout",
+    "on-click": "wlogout"
+  }
+}
