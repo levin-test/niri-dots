@@ -1,9 +1,99 @@
 * {
-    font-family: "JetBrainsMono Nerd Font Mono", monospace;
+    font-family: "Moralerspace Neon JPDOC";
+    /*font-family: "Noto Sans CJK JP", monospace;*/
+    /*font-family: "JetBrainsMono Nerd Font", monospace;*/
+
+    font-size: 18px;
+    font-weight: 700;
+    background-color: #212121;
+    color: gainsboro;
+}
+
+#custom-hardware-wrap {
+    color: skyblue;
+    margin-left: 10px;
+    font-size: 24px;
+    padding: 0 6px;
+}
+
+#custom-hardware-wrap:hover {
+    background: gray;
+    border-radius: 6px;
+}
+
+#cpu {
+    color: darkorange;
+    margin-left: 12px;
+}
+
+#temperature {
+    color: darkorange;
+    margin-left: 6px;
+}
+
+#disk {
+    margin-left: 12px;
+    color: yellow;
+}
+
+#custom-gpu {
+    color: #c678dd;
+    margin-left: 12px;
+}
+
+#memory {
+    color: #98c379;
+    margin-left: 12px;
+}
+
+#taskbar {
+    margin-left: 24px;
+}
+
+#taskbar button {
+    background-color: rgba(50, 50, 50, 0.8);
+    border: 2px solid #444444;
+    border-radius: 4px;
+    padding: 0 8px;
+    margin: 0 4px;
+    transition: all 0.3s;
+}
+
+#taskbar button:hover {
+    background-color: rgba(70, 70, 70, 0.9);
+    border-color: #666666;
+}
+
+#taskbar button.active {
+    background-color: rgba(100, 100, 150, 0.8);
+    border-color: #5555ff;
+}
+
+#workspaces {
+    margin-left: 32px;
+}
+
+#clock {
+    color: greenyellow;
+    font-size: 16px;
+}
+
+#custom-makoDismiss {
+    margin-right: 12px;
+}
+
+#language {
+    margin-right: 12px;
+    font-size: 12px;
+}
+
+#tray {
+    margin-right: 12px;
 }
 
 #custom-wlogout {
     padding: 0 18px;
+    font-family: "JetBrainsMono Nerd Font Mono";
     font-size: 20px;
     color: #e06c75;
     background: rgba(40, 44, 52, 0.85);
@@ -11,6 +101,7 @@
     margin-right: 8px;
     transition: background 0.2s;
 }
+
 #custom-wlogout:hover {
     background: rgba(224, 108, 117, 0.15);
 }

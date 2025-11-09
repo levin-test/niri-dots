@@ -1,5 +1,7 @@
 spawn-at-startup "waybar"
 spawn-at-startup "fcitx5" "-d"
+spawn-at-startup "swww-daemon"
+spawn-at-startup "swww" "restore"
 
 input {
     keyboard {
@@ -19,10 +21,36 @@ input {
     trackpoint {
     }
 }
-
+//
 environment {
 }
 
+/-output "HDMI-A-1" {
+    position x=0 y=0
+}
+
+/-output "DP-1" {
+    position x=2560 y=0
+}
+
+window-rule {
+    match app-id=r#"^dev\.zed\.Zed$"# is-focused=true
+    match app-id=r#"^dev\.zed\.Zed$"# is-focused=false
+    opacity 0.9
+    default-column-width { proportion 1.0; }
+}
+
+window-rule {
+    match app-id=r#"^nemo$"# is-focused=true
+    match app-id=r#"^nemo$"# is-focused=false
+    opacity 0.9
+}
+
+window-rule {
+    match app-id=r#"^mousepad$"# is-focused=true
+    match app-id=r#"^mousepad$"# is-focused=false
+    opacity 0.9
+}
 
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -44,17 +72,15 @@ layout {
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        width 6.4
+        width 3.2
         active-color "violet"
         inactive-color "#505050"
     }
 
     border {
-        off
-
         width 5
-        active-color "#ffc87f"
-        inactive-color "#505050"
+        active-color "#0000"
+        inactive-color "#0000"
         urgent-color "#9b0000"
     }
 
@@ -79,7 +105,8 @@ binds {
 
     // Launchers
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Alt+Space hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
+    Alt+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+Shift+C hotkey-overlay-title="Clear All Notifications (mako)" { spawn "makoctl" "dismiss" "-a"; }
 
     // Media keys
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
@@ -219,6 +246,9 @@ binds {
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Shift+E { quit; }
     Ctrl+Alt+Delete { quit; }
+
+    // Wallpaper binding
+    Mod+W hotkey-overlay-title="Change the Wallpaper" { spawn-sh "~/.config/niri/scripts/wallpaper_selector.sh"; }
 
     // Screenshot bindings
     Print { screenshot; }

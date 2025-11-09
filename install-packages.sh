@@ -77,7 +77,8 @@ PKGS_OFFICIAL=(
 
 # AUR packages
 PKGS_AUR=(
-  hyprpaper          # Wallpaper management (AUR)
+  google-chrome      # Google Chrome browser (AUR)
+  # hyprpaper          # Wallpaper management (AUR) - commented out as optional
   swww               # Image switching / wallpaper (AUR)
   nwg-look           # GTK theme settings (AUR)
   visual-studio-code-bin # Visual Studio Code (AUR)
