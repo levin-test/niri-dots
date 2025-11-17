@@ -1,9 +1,12 @@
 {
   "layer": "top",
   "height": 32,
-  "spacing": 3,
+  "spacing": 0,
+  "margin-top": 5,
+  "margin-left": 5,
+  "margin-right": 5,
   "modules-left": [
-    "custom/hardware-wrap",
+    "custom/appmenu",
     "cpu",
     "temperature",
     "disk",
@@ -11,16 +14,16 @@
     "custom/gpu",
     "wlr/taskbar",
   ],
-  "modules-center": ["clock", "niri/workspaces"],
-  "modules-right": [
-    "custom/makoDismiss",
-    "niri/language",
-    "tray",
-    "pulseaudio",
-    "custom/wlogout",
-  ],
-  "custom/hardware-wrap": {
+  "modules-center": ["clock", "niri/workspaces", "custom/makoDismiss"],
+  "modules-right": ["niri/language", "tray", "pulseaudio", "custom/wlogout"],
+  "custom/appmenu": {
+    // Arch Linux logo
     "format": "",
+    // Other distro logos(Fedora, Ubuntu, openSUSE, Debian, etc.) can be used here:
+    // "format": "",
+    // "format": "",
+    // "format": "",
+    // "format": "",
     "on-click": "rofi -show drun",
   },
   "cpu": {
@@ -47,13 +50,6 @@
     // "format": "󰍛 {used}/{total} GB",
     "on-click": "kitty -e btop",
   },
-  // "custom/gpu": {
-  //   "format": "󰢮 {}",
-  //   "interval": 2,
-  //   "exec": "sensors | grep -i 'edge' | awk '{print $2}'",
-  //   "on-click": "kitty -e nvtop",
-  // },
-
   "custom/gpu": {
     "format": "󰢮 {}",
     "interval": 2,
@@ -66,11 +62,12 @@
     "path": "/",
   },
   "wlr/taskbar": {
+    "format": "{icon}",
     "all-outputs": true,
     "icon-size": 28,
     "max-title-length": 3,
-    "format": "{icon}",
     "on-click": "activate",
+    "on-click-middle": "close",
   },
   "niri/workspaces": {
     "format": "{icon}",
@@ -80,7 +77,7 @@
     },
   },
   "clock": {
-    "format": "󰥔 {:%H:%M  󰃮 %b %d,%Y}",
+    "format": "󰥔 {:%H:%M  󰃮 %Y-%m-%d(%a)}",
     "format-alt": "󰥔  {:%H:%M}",
     "tooltip-format": "<big>{:%Y %b}</big>\n<tt><small>{calendar}</small></tt>",
     "calendar": {
@@ -142,6 +139,11 @@
     "format-icons": "",
     "tooltip-format": "Dismiss all notifications",
     "on-click": "makoctl dismiss -a",
+  },
+  "niri/language": {
+    "format": "{short}",
+    // "tooltip": "Change Keyboard Layout",
+    // "on-click": "niri-keyboard-layout-switcher",
   },
   "tray": {
     "icon-size": 20,

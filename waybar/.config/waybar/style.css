@@ -1,22 +1,24 @@
 * {
-    font-family: "Moralerspace Neon JPDOC";
+    /*font-family: "Moralerspace Neon JPDOC";*/
     /*font-family: "Noto Sans CJK JP", monospace;*/
     /*font-family: "JetBrainsMono Nerd Font", monospace;*/
+    /*font-family: "roundedm+1cmedium", monospace;*/
+    font-family: "Moralerspace Xenon JPDOC";
 
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
-    background-color: #212121;
+    background-color: rgba(60, 60, 60, 0.1);
     color: gainsboro;
 }
 
-#custom-hardware-wrap {
+#custom-appmenu {
     color: skyblue;
-    margin-left: 10px;
-    font-size: 24px;
+    margin-left: 5px;
+    font-size: 22px;
     padding: 0 6px;
 }
 
-#custom-hardware-wrap:hover {
+#custom-appmenu:hover {
     background: gray;
     border-radius: 6px;
 }
@@ -79,16 +81,29 @@
 }
 
 #custom-makoDismiss {
+    margin-left: 20px;
     margin-right: 12px;
 }
 
 #language {
     margin-right: 12px;
+    margin-left: 12px;
     font-size: 12px;
 }
 
 #tray {
     margin-right: 12px;
+}
+
+#tray > * {
+    transition: all 0.2s;
+    padding: 0 4px;
+    border-radius: 4px;
+}
+
+#tray > *:hover {
+    background: rgba(100, 100, 100, 0.5);
+    color: #ffffff;
 }
 
 #custom-wlogout {
@@ -100,6 +115,17 @@
     border-radius: 6px;
     margin-right: 8px;
     transition: background 0.2s;
+}
+
+menuitem {
+    padding: 5px 10px;
+    color: gainsboro;
+    background-color: #212121;
+}
+
+menuitem:hover {
+    background-color: rgba(100, 100, 100, 0.5);
+    color: #ffffff;
 }
 
 #custom-wlogout:hover {
