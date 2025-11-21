@@ -24,17 +24,19 @@
     // "format": "",
     // "format": "",
     // "format": "",
-    "on-click": "rofi -show drun",
+    "tooltip": true,
+    "tooltip-format": "App Menu",
+    "on-click": "fuzzel",
   },
   "cpu": {
     "format": "󰘚 {usage}%",
     "tooltip": true,
+    "tooltip-format": "CPU Usage: {usage}%",
     "interval": 2,
     "on-click": "kitty -e btop",
   },
   "temperature": {
     "interval": 2,
-    "tooltip": true,
     "hwmon-path": [
       "/sys/class/hwmon/hwmon1/temp1_input",
       "/sys/class/thermal/thermal_zone0/temp",
@@ -42,16 +44,22 @@
     "critical-threshold": 82,
     "format": "{icon} {temperatureC}°C",
     "format-icons": ["󰈸"],
+    "tooltip": true,
+    "tooltip-format": "CPU Temperature: {temperatureC}°C",
     "on-click": "kitty -e btop",
   },
   "memory": {
     "interval": 2,
     "format": "󰍛 {used:.1f}GB",
     // "format": "󰍛 {used}/{total} GB",
+    "tooltip": true,
+    "tooltip-format": "Memory Usage: {used} / {total} GB",
     "on-click": "kitty -e btop",
   },
   "custom/gpu": {
     "format": "󰢮 {}",
+    "tooltip": true,
+    "tooltip-format": "GPU Temperature: {}",
     "interval": 2,
     "exec": "sensors | grep -i 'edge' | awk '{gsub(/\\+/, \"\", $2); split($2, a, \".\"); print a[1] \"°C\"}'",
     "on-click": "kitty -e nvtop",
@@ -59,6 +67,8 @@
   "disk": {
     "interval": 30,
     "format": "󰋊 {percentage_used}%",
+    "tooltip": true,
+    "tooltip-format": "Disk Usage: {used} / {total} ({percentage_used}%)",
     "path": "/",
   },
   "wlr/taskbar": {
@@ -99,7 +109,8 @@
   },
   "custom/wlogout": {
     "format": "⏻",
-    "tooltip": "Power Menu",
+    "tooltip": true,
+    "tooltip-format": "Power Menu",
     "on-click": "wlogout",
   },
   "pulseaudio": {

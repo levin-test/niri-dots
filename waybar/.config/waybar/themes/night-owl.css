@@ -1,0 +1,28 @@
+/* Night Owl Theme */
+@define-color global_bg              rgba(1, 22, 39, 0.65);
+@define-color global_fg              #d6deeb;
+@define-color tooltip_bg             rgba(1, 15, 28, 0.95);
+@define-color tooltip_border         #7fdbca;
+@define-color appmenu_fg             #82aaff;
+@define-color appmenu_hover_bg       #0b2942;
+@define-color cpu_fg                 #ef5350;
+@define-color temperature_fg         #f78c6c;
+@define-color disk_fg                #addb67;
+@define-color gpu_fg                 #7fdbca;
+@define-color memory_fg              #c792ea;
+@define-color taskbar_btn_bg         rgba(11, 41, 66, 0.85);
+@define-color taskbar_btn_border     #5f7e97;
+@define-color taskbar_btn_hover_bg   rgba(15, 55, 88, 0.9);
+@define-color taskbar_btn_hover_border #7fdbca;
+@define-color taskbar_btn_active_bg  rgba(127, 219, 202, 0.3);
+@define-color taskbar_btn_active_border #7fdbca;
+@define-color clock_fg               #ffeb95;
+@define-color tray_hover_bg          rgba(15, 55, 88, 0.8);
+@define-color tray_hover_fg          #ffffff;
+@define-color logout_fg              #d6deeb;
+@define-color logout_bg              rgba(1, 15, 28, 0.85);
+@define-color logout_hover_bg        rgba(239, 83, 80, 0.2);
+@define-color menuitem_fg            #d6deeb;
+@define-color menuitem_bg            #011627;
+@define-color menuitem_hover_bg      #0b2942;
+@define-color menuitem_hover_fg      #82aaff;

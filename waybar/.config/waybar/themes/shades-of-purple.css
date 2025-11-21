@@ -1,0 +1,28 @@
+/* Shades of Purple Theme */
+@define-color global_bg              rgba(44, 39, 77, 0.65);
+@define-color global_fg              #e3dfff;
+@define-color tooltip_bg             rgba(30, 27, 53, 0.95);
+@define-color tooltip_border         #fad000;
+@define-color appmenu_fg             #80fcff;
+@define-color appmenu_hover_bg       #3d3759;
+@define-color cpu_fg                 #ec3a37;
+@define-color temperature_fg         #fb9e00;
+@define-color disk_fg                #b362ff;
+@define-color gpu_fg                 #a5ff90;
+@define-color memory_fg              #4cd213;
+@define-color taskbar_btn_bg         rgba(61, 55, 89, 0.85);
+@define-color taskbar_btn_border     #b362ff;
+@define-color taskbar_btn_hover_bg   rgba(75, 68, 110, 0.9);
+@define-color taskbar_btn_hover_border #ff628c;
+@define-color taskbar_btn_active_bg  rgba(179, 98, 255, 0.3);
+@define-color taskbar_btn_active_border #b362ff;
+@define-color clock_fg               #fad000;
+@define-color tray_hover_bg          rgba(75, 68, 110, 0.8);
+@define-color tray_hover_fg          #ffffff;
+@define-color logout_fg              #e3dfff;
+@define-color logout_bg              rgba(30, 27, 53, 0.85);
+@define-color logout_hover_bg        rgba(236, 58, 55, 0.2);
+@define-color menuitem_fg            #e3dfff;
+@define-color menuitem_bg            #2d2b55;
+@define-color menuitem_hover_bg      #3d3759;
+@define-color menuitem_hover_fg      #80fcff;

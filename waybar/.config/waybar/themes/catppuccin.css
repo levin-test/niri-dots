@@ -1,0 +1,28 @@
+/* Catppuccin (Mocha) Theme */
+@define-color global_bg              rgba(17, 17, 27, 0.55);
+@define-color global_fg              #f5e0dc;
+@define-color tooltip_bg             rgba(24, 24, 37, 0.95);
+@define-color tooltip_border         #b4befe;
+@define-color appmenu_fg             #b4befe;
+@define-color appmenu_hover_bg       #313244;
+@define-color cpu_fg                 #f38ba8;
+@define-color temperature_fg         #fab387;
+@define-color disk_fg                #f5e0dc;
+@define-color gpu_fg                 #b4befe;
+@define-color memory_fg              #94e2d5;
+@define-color taskbar_btn_bg         rgba(49, 50, 68, 0.6);
+@define-color taskbar_btn_border     #b4befe;
+@define-color taskbar_btn_hover_bg   rgba(69, 71, 90, 0.8);
+@define-color taskbar_btn_hover_border #cba6f7;
+@define-color taskbar_btn_active_bg  rgba(180, 190, 254, 0.3);
+@define-color taskbar_btn_active_border #b4befe;
+@define-color clock_fg               #cdd6f4;
+@define-color tray_hover_bg          rgba(49, 50, 68, 0.7);
+@define-color tray_hover_fg          #f5e0dc;
+@define-color logout_fg              #f2cdcd;
+@define-color logout_bg              rgba(17, 17, 27, 0.85);
+@define-color logout_hover_bg        rgba(243, 139, 168, 0.25);
+@define-color menuitem_fg            #f5e0dc;
+@define-color menuitem_bg            #11111b;
+@define-color menuitem_hover_bg      #313244;
+@define-color menuitem_hover_fg      #f2cdcd;

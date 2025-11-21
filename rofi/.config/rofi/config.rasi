@@ -1,7 +1,0 @@
-configuration {
-    show-icons: true;
-    terminal: "kitty";
-    font: "Noto Sans CJK JP 16";
-}
-
-@theme "Arc-Dark.rasi"

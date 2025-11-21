@@ -1,0 +1,28 @@
+/* Tokyo Night Theme */
+@define-color global_bg              rgba(26, 27, 38, 0.7);
+@define-color global_fg              #c0caf5;
+@define-color tooltip_bg             rgba(26, 27, 38, 0.95);
+@define-color tooltip_border         #7aa2f7;
+@define-color appmenu_fg             #7dcfff;
+@define-color appmenu_hover_bg       #2f334d;
+@define-color cpu_fg                 #f7768e;
+@define-color temperature_fg         #ff9e64;
+@define-color disk_fg                #c0caf5;
+@define-color gpu_fg                 #bb9af7;
+@define-color memory_fg              #9ece6a;
+@define-color taskbar_btn_bg         rgba(47, 51, 76, 0.85);
+@define-color taskbar_btn_border     #7aa2f7;
+@define-color taskbar_btn_hover_bg   rgba(63, 69, 102, 0.95);
+@define-color taskbar_btn_hover_border #bb9af7;
+@define-color taskbar_btn_active_bg  rgba(125, 194, 255, 0.25);
+@define-color taskbar_btn_active_border #7dcfff;
+@define-color clock_fg               #c0caf5;
+@define-color tray_hover_bg          rgba(63, 69, 102, 0.8);
+@define-color tray_hover_fg          #c0caf5;
+@define-color logout_fg              #f7768e;
+@define-color logout_bg              rgba(26, 27, 38, 0.85);
+@define-color logout_hover_bg        rgba(247, 118, 142, 0.2);
+@define-color menuitem_fg            #c0caf5;
+@define-color menuitem_bg            #1a1b26;
+@define-color menuitem_hover_bg      #2f334d;
+@define-color menuitem_hover_fg      #f4f7ff;

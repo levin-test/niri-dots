@@ -1,6 +1,6 @@
 # niri-dots
 
-Arch系Linuxディストリビューションで統合的なNiriデスクトップ環境を構築するための包括的なドットファイルリポジトリです。Niri、Waybar、Rofi、および自動化スクリプトの設定ファイルと導入ガイドを提供します。
+Arch系Linuxディストリビューションで統合的なNiriデスクトップ環境を構築するための包括的なドットファイルリポジトリです。Niri、Waybar、Fuzzel、および自動化スクリプトの設定ファイルと導入ガイドを提供します。
 
 **niri-dots** は、生産性重視のNiriベースのデスクトップ環境をスムーズに導入するための設定ファイル、自動化スクリプト、および詳細なインストール手順を提供します。
 
@@ -18,7 +18,7 @@ Arch系Linuxディストリビューションで統合的なNiriデスクトッ�
 - [コンポーネント設定](#コンポーネント設定)
   - [Niri](#niri)
   - [Waybar](#waybar)
-  - [Rofi](#rofi)
+
 - [自動化スクリプト](#自動化スクリプト)
   - [launch-waybar.sh](#launch-waybarsh)
   - [f2_launcher](#f2_launcher)
@@ -35,7 +35,7 @@ Arch系Linuxディストリビューションで統合的なNiriデスクトッ�
 
 - **Niriコンポジタ**: メインのウィンドウマネージャー
 - **Waybar**: システム情報表示とクイックアクションが可能なステータスバー
-- **Rofi**: アプリケーションランチャーとウィンドウスイッチャー
+- **Fuzzel**: アプリケーションランチャー
 - **自動化スクリプト**: 設定管理をスムーズにするツール
 - **システム統合**: システム監視、ファイル管理、開発ツール用ユーティリティ
 
@@ -63,12 +63,6 @@ niri-dots/
 │       │   ├── config.jsonc       # Waybarモジュールとレイアウト
 │       │   └── style.css          # Waybarのスタイル定義
 │
-├── rofi/                          # Rofiランチャーの設定
-│   └── .config/
-│       └── rofi/
-│           ├── config.rasi        # Rofiの設定とキーバインディング
-│           └── [テーマファイル]    # カラースキームとテーマ
-│
 └── automation/                    # 自動化スクリプトとヘルパー
     └── .local/
         └── bin/
@@ -91,7 +85,7 @@ sudo bash install-packages.sh
 
 # 3. 設定ファイルの配置
 # GNU Stowを使用する方法（推奨）：
-stow niri waybar rofi automation
+stow niri waybar automation
 
 # 4. Niriの起動
 # ログアウトしてセッション選択画面でNiriを選択するか、以下を実行：
@@ -260,42 +254,6 @@ killall launch-waybar.sh
 - `sys-apps/inotify-tools` - ファイル監視
 
 **ドキュメント**: [Waybar GitHub](https://github.com/Alexays/Waybar)
-
-### Rofi
-
-Rofiはアプリケーションランチャー、ウィンドウスイッチャー、汎用メニューシステムとして機能します。
-
-**設定ファイル**: `~/.config/rofi/config.rasi`
-
-**主な機能**:
-
-- アプリケーションの起動
-- ウィンドウの切り替え
-- SSHコネクション
-- スクリプト実行
-- カスタムテーマ
-
-**使用方法**:
-
-```bash
-# Rofiを起動（通常はNiriのキーバインディングにバインド）
-rofi -show drun        # アプリケーションランチャー
-rofi -show window      # ウィンドウスイッチャー
-rofi -show ssh         # SSHランチャー
-```
-
-**カスタマイズ**:
-
-`~/.config/rofi/config.rasi` を編集して、以下をカスタマイズできます：
-
-- カラースキーム
-- フォントとサイズ
-- ソートとフィルタリング動作
-- カスタムキーバインディング
-
-**ドキュメント**: [Rofi GitHub](https://github.com/davatorium/rofi)
-
----
 
 ## 自動化スクリプト
 
@@ -488,10 +446,6 @@ binds {
 
 **Rofiテーマ**: `~/.config/rofi/config.rasi` を編集するか、カスタムテーマファイルを作成
 
-### Rofiへのカスタムアプリケーション追加
-
-`~/.local/share/applications/` に `.desktop` ファイルを作成するか、システム全体で `~`.`/usr/share/applications/` に配置
-
 ### Waybarモジュールの調整
 
 `~/.config/waybar/config.jsonc` を編集してモジュールの追加、削除、または並び替え：
@@ -528,19 +482,6 @@ waybar
 
 # ログを確認
 tail -f nohup.out  # launch-waybar.sh使用時
-```
-
-### Rofiが起動しない
-
-```bash
-# Rofiがインストールされているか確認
-which rofi
-
-# Rofiを直接テスト
-rofi -show drun
-
-# 設定ファイルの構文を確認
-rofi -config ~/.config/rofi/config.rasi -show drun
 ```
 
 ### Niriがクラッシュするか起動しない

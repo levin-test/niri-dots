@@ -1,0 +1,28 @@
+/* Solarized Dark Theme */
+@define-color global_bg              rgba(0, 43, 54, 0.7);
+@define-color global_fg              #eee8d5;
+@define-color tooltip_bg             rgba(7, 54, 66, 0.95);
+@define-color tooltip_border         #93a1a1;
+@define-color appmenu_fg             #268bd2;
+@define-color appmenu_hover_bg       #073642;
+@define-color cpu_fg                 #cb4b16;
+@define-color temperature_fg         #b58900;
+@define-color disk_fg                #eee8d5;
+@define-color gpu_fg                 #268bd2;
+@define-color memory_fg              #859900;
+@define-color taskbar_btn_bg         rgba(7, 54, 66, 0.85);
+@define-color taskbar_btn_border     #93a1a1;
+@define-color taskbar_btn_hover_bg   rgba(0, 43, 54, 0.9);
+@define-color taskbar_btn_hover_border #2aa198;
+@define-color taskbar_btn_active_bg  rgba(38, 139, 210, 0.3);
+@define-color taskbar_btn_active_border #268bd2;
+@define-color clock_fg               #93a1a1;
+@define-color tray_hover_bg          rgba(0, 43, 54, 0.8);
+@define-color tray_hover_fg          #eee8d5;
+@define-color logout_fg              #dc322f;
+@define-color logout_bg              rgba(7, 54, 66, 0.85);
+@define-color logout_hover_bg        rgba(220, 50, 47, 0.2);
+@define-color menuitem_fg            #eee8d5;
+@define-color menuitem_bg            #002b36;
+@define-color menuitem_hover_bg      #073642;
+@define-color menuitem_hover_fg      #fdf6e3;

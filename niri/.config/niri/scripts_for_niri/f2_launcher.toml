@@ -87,7 +87,7 @@ xdg-open = "gui"
 [mime_types]
 
 # Text files
-"text/plain" = ["zeditor", "code", "nvim"]
+"text/plain" = ["zeditor", "code", "mousepad", "nvim"]
 "text/x-shellscript" = ["zeditor", "code", "mousepad", "nvim"]
 "text/x-python" = ["zeditor", "code", "mousepad", "nvim"]
 "application/json" = ["zeditor", "code", "mousepad", "nvim"]
@@ -111,4 +111,4 @@ xdg-open = "gui"
 "video/mp4" = ["mpv", "totem"]
 
 # Directories
-"inode/directory" = ["zeditor", "code", "nemo"]
+"inode/directory" = ["zeditor", "code", "nemo", "kitty"]

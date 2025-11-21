@@ -1,0 +1,139 @@
+/******************************************************************************
+ Base styling (theme-agnostic)
+
+ This file contains all style rules that don't depend on color themes.
+ Color variables are defined in individual theme files under themes/
+******************************************************************************/
+
+* {
+    font-family: "Moralerspace Neon JPDOC";
+    /* font-family alternatives left as comments for quick swaps */
+    font-size: 16px;
+    font-weight: 700;
+    background: @global_bg;
+    color: @global_fg;
+}
+
+tooltip {
+    background: @tooltip_bg;
+    border: 1px solid @tooltip_border;
+}
+
+#custom-appmenu {
+    color: @appmenu_fg;
+    margin-left: 5px;
+    font-size: 24px;
+    padding: 0 6px;
+}
+
+#custom-appmenu:hover {
+    background: @appmenu_hover_bg;
+    border-radius: 6px;
+}
+
+#cpu {
+    color: @cpu_fg;
+    margin-left: 12px;
+}
+
+#temperature {
+    color: @temperature_fg;
+    margin-left: 6px;
+}
+
+#disk {
+    color: @disk_fg;
+    margin-left: 12px;
+}
+
+#custom-gpu {
+    color: @gpu_fg;
+    margin-left: 12px;
+}
+
+#memory {
+    color: @memory_fg;
+    margin-left: 12px;
+}
+
+#taskbar {
+    margin-left: 24px;
+}
+
+#taskbar button {
+    background-color: @taskbar_btn_bg;
+    border: 2px solid @taskbar_btn_border;
+    border-radius: 4px;
+    padding: 0 8px;
+    margin: 0 4px;
+    transition: all 0.3s;
+}
+
+#taskbar button:hover {
+    background-color: @taskbar_btn_hover_bg;
+    border-color: @taskbar_btn_hover_border;
+}
+
+#taskbar button.active {
+    background-color: @taskbar_btn_active_bg;
+    border-color: @taskbar_btn_active_border;
+}
+
+#workspaces {
+    margin-left: 32px;
+}
+
+#clock {
+    color: @clock_fg;
+}
+
+#custom-makoDismiss {
+    margin-left: 20px;
+    margin-right: 12px;
+}
+
+#language {
+    margin-right: 12px;
+    margin-left: 12px;
+    font-size: 12px;
+}
+
+#tray {
+    margin-right: 12px;
+}
+
+#tray > * {
+    transition: all 0.2s;
+    padding: 0 4px;
+    border-radius: 4px;
+}
+
+#tray > *:hover {
+    background: @tray_hover_bg;
+    color: @tray_hover_fg;
+}
+
+#custom-wlogout {
+    padding: 0 18px;
+    font-size: 20px;
+    color: @logout_fg;
+    background: @logout_bg;
+    border-radius: 6px;
+    margin-right: 8px;
+    transition: background 0.2s;
+}
+
+#custom-wlogout:hover {
+    background: @logout_hover_bg;
+}
+
+menuitem {
+    padding: 5px 10px;
+    color: @menuitem_fg;
+    background-color: @menuitem_bg;
+}
+
+menuitem:hover {
+    background-color: @menuitem_hover_bg;
+    color: @menuitem_hover_fg;
+}

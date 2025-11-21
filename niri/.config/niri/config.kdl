@@ -2,6 +2,7 @@ spawn-at-startup "waybar"
 spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "swww" "restore"
+spawn-at-startup "swayidle" "-w" "timeout" "3600" "swaylock -f" "timeout" "7200" "systemctl suspend" "before-sleep" "swaylock -f"
 
 input {
     keyboard {
@@ -31,6 +32,13 @@ environment {
 
 /-output "DP-1" {
     position x=2560 y=0
+}
+
+gestures {
+    hot-corners {
+        // This function is disable now because next release will support this setting.
+        // bottom-right
+    }
 }
 
 window-rule {
@@ -256,7 +264,10 @@ binds {
     Mod+W hotkey-overlay-title="Change the Wallpaper" { spawn-sh "~/.config/niri/scripts_for_niri/wallpaper_selector.sh"; }
 
     // Fuzzy launcher binding
-    Mod+A hotkey-overlay-title="Fast Fuzzy launcher" { spawn-sh "~/niri-dots/niri/.config/niri/scripts_for_niri/f2_launcher.sh"; }
+    Mod+A hotkey-overlay-title="Open Fast Fuzzy Launcher" { spawn-sh "~/niri-dots/niri/.config/niri/scripts_for_niri/f2_launcher.sh"; }
+
+
+    Mod+T hotkey-overlay-title="Change the Waybar Color Scheme" { spawn-sh "~/niri-dots/waybar/.config/waybar/switch-theme.sh"; }
 
     // Screenshot bindings
     Print { screenshot; }

@@ -80,6 +80,9 @@ PKGS_OFFICIAL=(
   ttf-firacode-nerd  # FiraCode Nerd Font
   ttf-moralerspace   # MoralerSpace Font
   ttf-rounded-mplus  # Rounded M+ Font
+
+  # === DevOps & Cloud ===
+  github-copilot-cli # GitHub Copilot CLI
 )
 
 # AUR packages
@@ -92,7 +95,7 @@ PKGS_AUR=(
 
 # Flatpak packages
 FLATPAK_PKGS=(
-
+    org.upscayl.Upscayl # AI image upscaler
 )
 
 echo "Official packages to be installed:"
