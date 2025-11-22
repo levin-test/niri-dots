@@ -7,5 +7,5 @@
  Or use the switch-theme.sh script to change themes automatically.
 ******************************************************************************/
 
-@import "themes/catppuccin.css";
+@import "themes/ayu.css";
 @import "base.css";

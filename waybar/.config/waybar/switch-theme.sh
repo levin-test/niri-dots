@@ -8,9 +8,17 @@
 set -e
 
 STYLE_CSS="style.css"
+STYLE_TEMPLATE="style.css.template"
 DIR="$(dirname "$0")"
 TARGET="$DIR/$STYLE_CSS"
+TEMPLATE="$DIR/$STYLE_TEMPLATE"
 THEMES_DIR="$DIR/themes"
+
+# テンプレートファイルの存在確認
+if [ ! -f "$TEMPLATE" ]; then
+  echo "Error: $TEMPLATE not found."
+  exit 2
+fi
 
 # 引数なしの場合、fuzzelで選択
 if [ -z "$1" ]; then
@@ -64,20 +72,14 @@ fi
 # テーマ名を整形（ハイフンをスペースに、最初の文字を大文字に）
 THEME_NAME=$(echo "$1" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))}1')
 
-if [ ! -f "$TARGET" ]; then
-  echo "Error: $TARGET not found."
-  exit 2
-fi
-
-# バックアップ
-cp "$TARGET" "$TARGET.bak"
+# テンプレートからstyle.cssを生成
+cp "$TEMPLATE" "$TARGET"
 
 # sed で @import "themes/XXX.css" の行を書き換え
 sed -i "s|@import \"themes/.*\.css\";|@import \"themes/$THEME_FILE\";|" "$TARGET"
 
 if [ $? -ne 0 ]; then
-  echo "Error: Theme switching failed. Restoring backup..."
-  cp "$TARGET.bak" "$TARGET"
+  echo "Error: Theme switching failed."
   exit 3
 fi
 
