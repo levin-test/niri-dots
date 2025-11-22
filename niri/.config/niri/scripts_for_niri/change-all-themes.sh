@@ -25,12 +25,30 @@ else
 fi
 
 # Apply to waybar
-~/niri-dots/waybar/.config/waybar/switch-theme.sh "$SELECTED_THEME"
+if ~/niri-dots/waybar/.config/waybar/switch-theme.sh "$SELECTED_THEME"; then
+  WAYBAR_SUCCESS=true
+else
+  WAYBAR_SUCCESS=false
+fi
 
 # Check if theme exists in kitty
 if [ -f "$KITTY_THEMES_DIR/$SELECTED_THEME.conf" ]; then
-  ~/niri-dots/kitty/.config/kitty/scripts/switch-theme.sh "$SELECTED_THEME"
+  if ~/niri-dots/kitty/.config/kitty/scripts/switch-theme.sh "$SELECTED_THEME"; then
+    KITTY_SUCCESS=true
+  else
+    KITTY_SUCCESS=false
+  fi
 else
   notify-send "Theme '$SELECTED_THEME' not found in Kitty" "Please select a Kitty theme manually" -u normal
-  ~/niri-dots/kitty/.config/kitty/scripts/switch-theme.sh
+  if ~/niri-dots/kitty/.config/kitty/scripts/switch-theme.sh; then
+    KITTY_SUCCESS=true
+  else
+    KITTY_SUCCESS=false
+  fi
+fi
+
+# Notify on successful completion
+if [ "$WAYBAR_SUCCESS" = true ] && [ "$KITTY_SUCCESS" = true ]; then
+  THEME_NAME=$(echo "$SELECTED_THEME" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))}1')
+  notify-send "✓ Theme Changed" "Successfully switched to '$THEME_NAME'" -u normal
 fi

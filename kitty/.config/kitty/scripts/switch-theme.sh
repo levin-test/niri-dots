@@ -91,4 +91,7 @@ else
   echo "Note: No running kitty instances found. Theme will apply on next launch."
 fi
 
+# Send success notification
+notify-send "✓ Kitty Theme Changed" "Successfully switched to '$THEME_NAME'" -u low
+
 exit 0

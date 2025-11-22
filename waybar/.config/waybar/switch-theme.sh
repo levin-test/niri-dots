@@ -102,4 +102,7 @@ else
   echo "⚠ Please restart Waybar manually."
 fi
 
+# Send success notification
+notify-send "✓ Waybar Theme Changed" "Successfully switched to '$THEME_NAME'" -u low
+
 exit 0
