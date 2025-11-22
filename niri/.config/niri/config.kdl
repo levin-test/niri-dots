@@ -268,6 +268,8 @@ binds {
 
 
     Mod+T hotkey-overlay-title="Change the Waybar Color Scheme" { spawn-sh "~/niri-dots/waybar/.config/waybar/switch-theme.sh"; }
+    Mod+Alt+T hotkey-overlay-title="Change the Kitty Color Scheme" { spawn-sh "~/niri-dots/kitty/.config/kitty/scripts/switch-theme.sh"; }
+    Mod+Ctrl+Alt+T hotkey-overlay-title="Change the All Color Scheme" { spawn-sh "~/.config/niri/scripts_for_niri/change-all-themes.sh"; }
 
     // Screenshot bindings
     Print { screenshot; }

@@ -18,8 +18,10 @@ A comprehensive dotfiles repository for setting up an integrated Niri desktop en
 - [Component Configuration](#component-configuration)
   - [Niri](#niri)
   - [Waybar](#waybar)
-  - [Rofi](#rofi)
+  - [Kitty](#kitty)
+  - [Fuzzel](#fuzzel)
 - [Automation Scripts](#automation-scripts)
+  - [f2_launcher](#f2_launcher)
 - [Post-Installation Setup](#post-installation-setup)
 - [Customization](#customization)
 - [Troubleshooting](#troubleshooting)
@@ -32,8 +34,9 @@ A comprehensive dotfiles repository for setting up an integrated Niri desktop en
 **Niri** is a modern Wayland compositor designed for productivity. This repository provides a complete integration setup that includes:
 
 - **Niri Compositor**: The core window manager
-- **Waybar**: Status bar with system information and quick actions
-- **Rofi**: Application launcher and window switcher
+- **Waybar**: Status bar with system information and quick actions, with dynamic theme switching
+- **Kitty**: High-performance terminal emulator with theme support
+- **Fuzzel**: Application launcher
 - **Automation Scripts**: Tools to streamline configuration management
 - **System Integration**: Utilities for system monitoring, file management, and development tools
 
@@ -45,31 +48,61 @@ The configurations are designed to work seamlessly together, providing a cohesiv
 
 ```
 niri-dots/
-├── README.md                      # This file
+├── README.md                      # This file (English version)
+├── README.ja.md                   # Japanese documentation
 ├── LICENSE                        # MIT License
+├── .gitignore                     # Git exclusion settings
 ├── install-packages.sh            # Package installation script
 │
 ├── niri/                          # Niri compositor configuration
 │   └── .config/
 │       └── niri/
-│           └── config.kdl         # Main Niri configuration
+│           ├── config.kdl         # Main Niri configuration
+│           └── scripts_for_niri/
+│               ├── f2_launcher.sh           # File opener script
+│               ├── f2_launcher.toml         # File opener settings
+│               ├── wallpaper_selector.sh    # Wallpaper selector script
+│               └── change-all-themes.sh     # Batch theme change script
 │
 ├── waybar/                        # Waybar status bar configuration
-│   └── .config/
-│       ├── waybar/
-│       │   ├── config.jsonc       # Waybar modules and layout
-│       │   └── style.css          # Waybar styling
+│   └── .config/waybar/
+│       ├── README.md              # Waybar detailed documentation
+│       ├── config.jsonc           # Waybar modules and layout
+│       ├── base.css               # Waybar theme-independent style
+│       ├── style.css              # Waybar style (Git-managed)
+│       ├── switch-theme.sh        # Waybar theme switcher script
+│       └── themes/                # Waybar theme collection
+│           ├── catppuccin.css
+│           ├── gruvbox.css
+│           ├── nord.css
+│           ├── original.css
+│           ├── solarized.css
+│           └── tokyo-night.css
 │
-├── rofi/                          # Rofi launcher configuration
-│   └── .config/
-│       └── rofi/
-│           ├── config.rasi        # Rofi settings and keybindings
-│           └── [theme files]      # Color schemes and themes
+├── kitty/                         # Kitty terminal configuration
+│   └── .config/kitty/
+│       ├── README.md              # Kitty detailed documentation
+│       ├── kitty.conf             # Main Kitty configuration
+│       ├── themes/                # Kitty theme collection (12+ themes)
+│       │   ├── ayu.conf
+│       │   ├── catppuccin-mocha.conf
+│       │   ├── Earthsong.conf
+│       │   ├── gruvbox-dark.conf
+│       │   ├── nord.conf
+│       │   └── ...
+│       └── scripts/
+│           ├── switch-theme.sh    # Kitty theme switcher
+│           └── list-themes.sh     # List available themes
 │
-└── automation/                    # Automation and helper scripts
-    └── .local/
-        └── bin/
-            └── launch-waybar.sh   # Waybar auto-reload script
+├── fuzzel/                        # Fuzzel application launcher configuration
+│   └── .config/fuzzel/
+│       └── fuzzel.toml
+│
+└── misc/                          # Additional configuration and utilities
+    ├── .config/
+    │   └── (other configuration files)
+    └── .local/bin/
+        └── update-arch            # Arch system update script
 ```
 
 ---
@@ -88,11 +121,10 @@ sudo bash install-packages.sh
 
 # 3. Deploy configuration files
 # Using GNU Stow (recommended):
-stow niri waybar rofi automation
+stow niri waybar kitty fuzzel misc
 
 # 4. Start Niri
-# Log out and select Niri as your session, or run:
-niri
+# Log out and select "Niri" from the login manager (SDDM/GDM) session selection
 ```
 
 ---
@@ -104,7 +136,7 @@ niri
 - **Distribution**: Arch Linux or Arch-based distribution (Manjaro, EndeavourOS, etc.)
 - **AUR Helper**: `paru` or `yay` (for AUR package installation)
 - **Base System**: Updated system with essential build tools
-- **Display Server**: Wayland-capable GPU drivers
+- **Login Manager**: SDDM or GDM (required for Niri session)
 
 #### Checking Prerequisites
 
@@ -116,10 +148,8 @@ cat /etc/os-release
 which paru
 which yay
 
-# Verify GPU drivers are installed
-# NVIDIA users should have nvidia-open or nvidia drivers
-# AMD users should have mesa drivers
-# Intel users should have mesa drivers
+# Check login manager status
+systemctl status sddm    # or gdm
 ```
 
 ### Package Installation
@@ -132,14 +162,13 @@ sudo bash install-packages.sh
 
 **What gets installed:**
 
-- **Desktop Environment**: Niri, Waybar, Rofi, XWayland satellite
-- **System Tools**: NetworkManager, file managers, system monitors
-- **Terminal & Shell**: Kitty terminal, Starship prompt, Zoxide
-- **Development**: Neovim, Zed editor, Git, GitHub CLI, Go
-- **CLI Utilities**: eza, fd, fzf, ripgrep, delta, lazygit
-- **System Utilities**: Docker, Snapper, Flatpak, Gnome Keyring
-- **Multimedia**: KDEnlive, OBS Studio, Steam, Proton
-- **Fonts & Input**: Japanese input (fcitx5-mozc), Nerd Fonts
+- **Desktop Environment**: `niri`, `xwayland-satellite`, `waybar`, `fuzzel`, `wlogout`, `wl-clipboard`, `networkmanager`, `nemo`
+- **Terminal & Shell**: `kitty` (terminal emulator), `starship` (shell prompt customization tool), `zoxide` (fast directory jumper)
+- **Development**: `neovim`, `zed`, `mousepad`, `git`, `github-cli`, `go`
+- **CLI Utilities**: `eza`, `fd`, `fzf`, `ripgrep`, `delta`, `lazygit`, `go-yq`, `chafa`
+- **System Utilities**: `docker`, `snapper`, `flatpak`, `gnome-keyring`, `stow`, `xdg-user-dirs`, `xdg-utils`
+- **Multimedia**: `kdenlive`, `obs-studio`, `steam`, Proton-related packages
+- **Fonts & Input**: `fcitx5-mozc` (Japanese input), Nerd Fonts
 
 **Note**: Some packages are installed from the AUR. Review the script before running, especially if you prefer to use `yay` instead of `paru`.
 
@@ -155,26 +184,28 @@ sudo pacman -S stow
 
 # Deploy all configurations
 cd niri-dots
-stow niri waybar rofi automation
+stow niri waybar kitty fuzzel misc
 
 # Deploy individual components
 stow niri          # Only Niri config
 stow waybar        # Only Waybar config
-stow rofi          # Only Rofi config
-stow automation    # Only automation scripts
+stow kitty         # Only Kitty config
+stow fuzzel        # Only Fuzzel config
+stow misc          # Only utilities and commands
 ```
 
 #### Option 2: Manual Deployment
 
 ```bash
 # Copy configuration files to home directory
-mkdir -p ~/.config
+mkdir -p ~/.config ~/.local/bin
 cp -r niri/.config/niri ~/.config/
 cp -r waybar/.config/waybar ~/.config/
-cp -r rofi/.config/rofi ~/.config/
-mkdir -p ~/.local/bin
-cp automation/.local/bin/* ~/.local/bin/
-chmod +x ~/.local/bin/*
+cp -r kitty/.config/kitty ~/.config/
+cp -r fuzzel/.config/fuzzel ~/.config/
+cp -r misc/.config/* ~/.config/ 2>/dev/null || true
+cp -r misc/.local/bin/* ~/.local/bin/ 2>/dev/null || true
+chmod +x ~/.config/*/scripts/*.sh ~/.local/bin/* 2>/dev/null || true
 ```
 
 ---
@@ -190,137 +221,121 @@ Niri is the Wayland compositor and window manager at the heart of this setup.
 **Key Features**:
 
 - Tiling and floating window layouts
-- Workspace management
 - Custom keybindings
+- Per-application window rules (opacity, default width, etc.)
 - Monitor and resolution settings
-- Animation configuration
+- Focus ring and border customization
 
 **Getting Started**:
 
 1. Review the default configuration in this repository
 2. Customize keybindings to match your preferences
-3. Adjust layout rules for specific applications
-4. Configure monitors if using multiple displays
+3. Adjust per-application window rules (opacity, default width, etc.)
+4. Configure output settings if using multiple displays
 
-**Documentation**: [Niri GitHub Wiki](https://github.com/YarikSwitdan/niri/wiki)
+**Documentation**: [Niri GitHub](https://github.com/YaLTeR/niri)
 
 ### Waybar
 
 Waybar displays system information and provides quick access to common functions.
 
-**Configuration Files**:
+**Configuration File**: `~/.config/waybar/config.jsonc`, `~/.config/waybar/style.css`
 
-- `~/.config/waybar/config.jsonc` - Modules and layout
-- `~/.config/waybar/style.css` - Visual styling
-
-#### Waybar Auto-Reload
-
-The included `launch-waybar.sh` script automatically restarts Waybar when configuration changes are detected, eliminating the need for manual restarts.
-
-**Setup**:
+**Theme System**: Supports multiple themes including Catppuccin, Gruvbox, Nord, Solarized, and Tokyo Night.
 
 ```bash
-# Ensure the script is executable
-chmod +x ~/.local/bin/launch-waybar.sh
+# Switch themes (interactive)
+~/.config/waybar/switch-theme.sh
+
+# Switch to specific theme
+~/.config/waybar/switch-theme.sh gruvbox
 ```
 
-**Starting Waybar with Auto-Reload**:
+**Documentation**: [Waybar Configuration Guide](./waybar/.config/waybar/README.md)
+
+### Kitty
+
+Kitty is a high-performance terminal emulator with theme support.
+
+**Configuration File**: `~/.config/kitty/kitty.conf`
+
+**Theme System**: Supports 12+ themes with auto-initialization on first use.
 
 ```bash
-nohup ~/.local/bin/launch-waybar.sh &
+# Switch themes (interactive)
+~/.config/kitty/scripts/switch-theme.sh
+
+# Switch to specific theme
+~/.config/kitty/scripts/switch-theme.sh tokyo-night
+
+# List available themes
+~/.config/kitty/scripts/list-themes.sh
 ```
 
-The `nohup` command allows the script to continue running after closing your terminal. Output logs are written to `nohup.out`.
+**Documentation**: [Kitty Configuration Guide](./kitty/.config/kitty/README.md)
 
-**Monitored Files**:
+### Fuzzel
 
-- `~/.config/waybar/config.jsonc`
-- `~/.config/waybar/style.css`
+Fuzzel is a modern application launcher.
 
-When either file is modified, Waybar automatically:
+**Configuration File**: `~/.config/fuzzel/fuzzel.toml`
 
-1. Detects the change
-2. Stops the running Waybar process
-3. Starts Waybar with updated configuration
-
-**Stopping the Script**:
-
-```bash
-killall launch-waybar.sh
-```
-
-**Requirements**:
-
-- `gui-apps/waybar` - Status bar
-- `sys-apps/inotify-tools` - File monitoring
-
-**Documentation**: [Waybar GitHub](https://github.com/Alexays/Waybar)
-
-### Rofi
-
-Rofi serves as the application launcher, window switcher, and general-purpose menu system.
-
-**Configuration File**: `~/.config/rofi/config.rasi`
-
-**Key Features**:
-
-- Application launching
-- Window switching
-- SSH connections
-- Script execution
-- Custom themes
-
-**Usage**:
-
-```bash
-# Launch Rofi (typically bound to a keybinding in Niri)
-rofi -show drun        # Application launcher
-rofi -show window      # Window switcher
-rofi -show ssh         # SSH launcher
-```
-
-**Customization**:
-
-Edit `~/.config/rofi/config.rasi` to customize:
-
-- Color schemes
-- Font and sizing
-- Sorting and filtering behavior
-- Custom keybindings
-
-**Documentation**: [Rofi GitHub](https://github.com/davatorium/rofi)
+**Documentation**: [Fuzzel Codeberg](https://codeberg.org/dnkl/fuzzel)
 
 ---
 
 ## Automation Scripts
 
-### launch-waybar.sh
+### f2_launcher
 
-Automatically manages Waybar configuration reloading.
+Advanced Fuzzy File Launcher with MIME-type support. Select applications to open files based on their MIME types.
 
-**Location**: `~/.local/bin/launch-waybar.sh`
+**Location**: `~/.config/niri/scripts_for_niri/f2_launcher.sh`
 
-**Source**: Based on the [Gentoo Wiki Waybar Configuration Guide](https://wiki.gentoo.org/wiki/Waybar)
+**Configuration File**: `~/.config/niri/scripts_for_niri/f2_launcher.toml`
+
+**Features**:
+
+- **MIME-type based application selection**: Configure multiple candidate applications for each MIME type
+- **Automatic CLI/GUI detection**: CLI apps like `nvim` and `nano` automatically launch in terminal; GUI apps like `zed` launch directly
+- **User selection dialog**: Choose from multiple candidates via Fuzzel
+- **Configuration-driven**: Easy customization using TOML format
 
 **Usage**:
 
 ```bash
-# Run in background
-nohup ~/.local/bin/launch-waybar.sh &
+# Run the script
+~/.config/niri/scripts_for_niri/f2_launcher.sh
 
-# Stop the script
-killall launch-waybar.sh
+# Register in Niri keybindings
+Mod+A { spawn-sh "~/.config/niri/scripts_for_niri/f2_launcher.sh"; }
 ```
 
-**How it Works**:
+**Configuration Example**:
 
-The script continuously monitors your Waybar configuration files. When changes are detected:
+```toml
+[app_metadata]
+nvim = "cli"
+nano = "cli"
+zed = "gui"
+code = "gui"
 
-- The current Waybar process is stopped
-- Waybar is restarted with the new configuration
-- Changes take effect immediately
+[mime_types]
+"text/plain" = ["zed", "code", "nvim"]
+"text/x-shellscript" = ["zed", "code", "nano"]
+"text/x-python" = ["zed", "code", "nvim"]
+```
 
-This is more convenient than manually restarting Waybar after each configuration edit.
+**Workflow**:
+
+1. Select file using `fd` and `fuzzel`
+2. Detect MIME type using `file` command
+3. Get candidate applications from configuration
+4. Filter by installed applications
+5. Display candidates in Fuzzel (if multiple available)
+6. Detect if application is CLI or GUI and launch accordingly
+   - **CLI**: Launch in terminal (foot/kitty/alacritty/xterm)
+   - **GUI**: Launch directly
 
 ---
 
@@ -331,11 +346,8 @@ After deploying configurations, perform these additional setup steps:
 ### 1. Start Niri
 
 ```bash
-# Option A: Through login manager (recommended)
-# Log out and select "Niri" as your session before logging in
-
-# Option B: From terminal
-niri
+# Via login manager (recommended, verified with SDDM/GDM)
+# Log out and select "Niri" from the session selection screen at login
 ```
 
 ### 2. Configure Displays (Multi-Monitor Setup)
@@ -343,16 +355,16 @@ niri
 Edit `~/.config/niri/config.kdl` to specify display settings:
 
 ```kdl
-output "HDMI-1" {
-    mode "1920x1080@60"
+output "HDMI-A-1" {
     position x=0 y=0
 }
 
 output "DP-1" {
-    mode "2560x1440@60"
-    position x=1920 y=0
+    position x=2560 y=0
 }
 ```
+
+You can specify resolution and refresh rate with the `mode` option if needed.
 
 ### 3. Set Up Waybar Autostart
 
@@ -362,23 +374,17 @@ Add to your Niri configuration to start Waybar automatically:
 spawn-at-startup "waybar"
 ```
 
-Or use the auto-reload script:
+### 4. Keyboard Configuration
 
-```kdl
-spawn-at-startup "nohup ~/.local/bin/launch-waybar.sh &"
-```
-
-### 4. Configure Keyboard Layout
-
-If using non-US keyboard layouts, configure in `~/.config/niri/config.kdl`:
+Customize keyboard settings in `~/.config/niri/config.kdl`:
 
 ```kdl
 input {
     keyboard {
         xkb {
-            layout "us"
+            # layout "us"  # Specify layout if needed
             # layout "jp"  # For Japanese
-            # layout "de"  # For German
+            options "ctrl:nocaps"  # Change CapsLock to Ctrl
         }
     }
 }
@@ -386,27 +392,33 @@ input {
 
 ### 5. Set Up Japanese Input (Optional)
 
-If you installed fcitx5-mozc and want Japanese input:
+If you installed fcitx5-mozc for Japanese input, configure environment variables:
 
 ```bash
-# Configure environment variables
+# Set environment variables
 echo 'export GTK_IM_MODULE=fcitx' >> ~/.bashrc
 echo 'export QT_IM_MODULE=fcitx' >> ~/.bashrc
 echo 'export XMODIFIERS=@im=fcitx' >> ~/.bashrc
+```
 
-# Start fcitx5 in Niri config
-spawn-at-startup "fcitx5"
+Niri configuration already includes:
+
+```kdl
+spawn-at-startup "fcitx5" "-d"
 ```
 
 ### 6. Customize Niri Keybindings
 
-Edit keybindings in `~/.config/niri/config.kdl`. Example:
+Edit keybindings in `~/.config/niri/config.kdl`. Default bindings include:
 
 ```kdl
 binds {
-    "Mod+q" = close-window;
-    "Mod+e" = spawn "rofi" "-show" "drun";
-    "Mod+Tab" = spawn "rofi" "-show" "window";
+    Mod+Return { spawn "kitty"; }                    # Launch terminal
+    Alt+Space { spawn "fuzzel"; }                    # Application launcher
+    Mod+Q { close-window; }                          # Close window
+    Mod+W { spawn-sh "~/.config/niri/scripts_for_niri/wallpaper_selector.sh"; }
+    Mod+T { spawn-sh "~/niri-dots/waybar/.config/waybar/switch-theme.sh"; }
+    Mod+Alt+T { spawn-sh "~/niri-dots/kitty/.config/kitty/scripts/switch-theme.sh"; }
 }
 ```
 
@@ -414,46 +426,74 @@ binds {
 
 ## Customization
 
-### Changing Color Schemes
+### Changing Themes
 
-**Waybar Colors**: Edit `~/.config/waybar/style.css`
+#### Waybar Theme
 
-```css
-* {
-  background: #1e1e2e;
-  foreground: #cdd6f4;
-}
+For details, see [Waybar README](./waybar/.config/waybar/README.md).
 
-#workspaces button.active {
-  background: #a6e3a1;
-  color: #1e1e2e;
-}
+```bash
+# Interactive theme selection
+~/.config/waybar/switch-theme.sh
+
+# Direct theme selection
+~/.config/waybar/switch-theme.sh nord
+
+# Accessible via Niri keybinding (default: Mod+T)
 ```
 
-**Rofi Theme**: Edit `~/.config/rofi/config.rasi` or create a custom theme file
+#### Kitty Theme
 
-### Adding Custom Applications to Rofi
+For details, see [Kitty README](./kitty/.config/kitty/README.md).
 
-Create a `.desktop` file in `~/.local/share/applications/` or system-wide in `/usr/share/applications/`
+```bash
+# Interactive theme selection
+~/.config/kitty/scripts/switch-theme.sh
+
+# Direct theme selection
+~/.config/kitty/scripts/switch-theme.sh palenight
+
+# List available themes
+~/.config/kitty/scripts/list-themes.sh
+
+# Accessible via Niri keybinding (default: Mod+Alt+T)
+```
+
+#### Initial Theme Setup
+
+```bash
+# Initialize Waybar theme
+~/.config/waybar/switch-theme.sh
+
+# Initialize Kitty theme (auto-initializes on first use)
+~/.config/kitty/scripts/switch-theme.sh
+```
 
 ### Adjusting Waybar Modules
 
-Edit `~/.config/waybar/config.jsonc` to add, remove, or reorder modules:
+Edit `~/.config/waybar/config.jsonc` to add, remove, or reorder modules.
 
-```json
-"modules-left": ["sway/workspaces", "sway/mode"],
-"modules-center": ["clock"],
-"modules-right": ["pulseaudio", "network", "cpu", "battery"]
-```
+### Configuring Niri Layout
 
-### Creating a Custom Niri Workspace Layout
-
-Add workspace rules to `~/.config/niri/config.kdl`:
+Customize layout settings in `~/.config/niri/config.kdl`:
 
 ```kdl
-workspace-switch-animation "to-side" {
-    duration-ms 250
-    curve "ease-out-cubic"
+layout {
+    gaps 5
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        width 3.2
+        active-color "violet"
+        inactive-color "#505050"
+    }
 }
 ```
 
@@ -471,20 +511,7 @@ pgrep waybar
 waybar
 
 # Check logs
-tail -f nohup.out  # If using launch-waybar.sh
-```
-
-### Rofi Not Launching
-
-```bash
-# Verify Rofi is installed
-which rofi
-
-# Test Rofi directly
-rofi -show drun
-
-# Check configuration syntax
-rofi -config ~/.config/rofi/config.rasi -show drun
+journalctl -u waybar -n 50
 ```
 
 ### Niri Crashes or Won't Start
@@ -501,23 +528,6 @@ mv ~/.config/niri/config.kdl ~/.config/niri/config.kdl.bak
 niri  # Will use default configuration
 ```
 
-### GPU Drivers Not Recognized
-
-```bash
-# Check installed drivers
-glxinfo | grep "OpenGL vendor"
-
-# For NVIDIA users
-nvidia-smi
-
-# For AMD users
-vulkaninfo | grep GPU
-
-# Install appropriate drivers
-sudo pacman -S nvidia          # NVIDIA
-sudo pacman -S mesa            # AMD/Intel
-```
-
 ### Input Method Issues
 
 ```bash
@@ -527,6 +537,16 @@ fcitx5 &
 
 # Check fcitx5 status
 fcitx5-diagnose
+```
+
+### Kitty Theme Not Applying
+
+```bash
+# Verify script is executable
+ls -la ~/.config/kitty/scripts/switch-theme.sh
+
+# Manually reinitialize
+~/.config/kitty/scripts/switch-theme.sh Earthsong
 ```
 
 ---
@@ -546,13 +566,11 @@ Contributions are welcome! If you have improvements to configurations or scripts
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-**Attribution**: The `launch-waybar.sh` script is based on content from the [Gentoo Wiki Waybar Configuration Guide](https://wiki.gentoo.org/wiki/Waybar), which is licensed under CC-BY-SA-4.0. © 2001–2025 Gentoo Authors.
-
 ---
 
 ## Acknowledgments
 
-This project was developed by the project maintainer with assistance from **GitHub Copilot**, an AI-powered code completion and generation tool. The project management, architectural decisions, and overall structure have been designed and planned by the project manager. GitHub Copilot has specifically assisted with:
+This project was developed by the project maintainer with assistance from **GitHub Copilot**, an AI-powered code completion and generation tool. The project management, architectural decisions, and overall structure have been designed and planned by the project maintainer. GitHub Copilot has specifically assisted with:
 
 - Code completion and refinement
 - Small-scale processing and implementation details
@@ -565,10 +583,10 @@ All work assisted by AI has undergone thorough review, modification, and validat
 
 ## Resources & Documentation
 
-- [Niri GitHub Repository](https://github.com/YarikSwitdan/niri)
-- [Niri Wiki & Documentation](https://github.com/YarikSwitdan/niri/wiki)
+- [Niri GitHub Repository](https://github.com/YaLTeR/niri)
 - [Waybar GitHub](https://github.com/Alexays/Waybar)
-- [Rofi GitHub](https://github.com/davatorium/rofi)
+- [Kitty Documentation](https://sw.kovidgoyal.net/kitty/)
+- [Fuzzel Codeberg](https://codeberg.org/dnkl/fuzzel)
 - [Arch Linux Wiki](https://wiki.archlinux.org/)
 - [Wayland Documentation](https://wayland.freedesktop.org/)
 
@@ -579,5 +597,5 @@ All work assisted by AI has undergone thorough review, modification, and validat
 For issues or questions:
 
 1. Check the [Troubleshooting](#troubleshooting) section
-2. Review component documentation links above
+2. Review component documentation (Waybar, Kitty) for detailed information
 3. Open an issue on GitHub with detailed information about your setup and the problem

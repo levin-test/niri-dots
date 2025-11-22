@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# Script to install required packages for Hyprland environment
+# Script to install required packages for niri environment
 # Run with sudo privileges if necessary
-# Target: Arch Linux (paru)
+# Target: Arch Linux or Arch based distributions (paru or yay is required for AUR packages)
 
 # Official repository packages
 PKGS_OFFICIAL=(
@@ -10,8 +10,9 @@ PKGS_OFFICIAL=(
   niri               # Window manager
   xwayland-satellite # XWayland satellite
   waybar             # Status bar
-  rofi               # Launcher
   fuzzel             # Alternative launcher
+  wlogout            # Logout screen for Wayland (provides UI for logout, reboot, shutdown, etc.)
+  wl-clipboard       # Clipboard manager for Wayland
   networkmanager     # Network management
   nemo               # File manager
 
@@ -34,7 +35,7 @@ PKGS_OFFICIAL=(
   delta              # git diff viewer
   lazygit            # Terminal git client
   go-yq              # YAML processor
-
+  chafa              # Terminal image viewer
 
   # === Version Control & APIs ===
   git                # Version control
